@@ -7,6 +7,7 @@ namespace BlackJack
     public class Deck
     {
         public Queue<Card> Cards;
+
         public Deck()
         {
             PopulateDeck();

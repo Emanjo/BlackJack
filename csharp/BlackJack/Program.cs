@@ -20,7 +20,7 @@ namespace BlackJack
                 {
                     var card = deck.Cards.Dequeue();
 
-                    if (card.RankDisplayName.ToLower() == "ess")
+                    if (card.RankName.ToLower() == "ess")
                     {
                         DeterminePointsForEss(hand, card);
                     }
@@ -35,7 +35,7 @@ namespace BlackJack
                         break;
                     }
 
-                    Console.WriteLine("Hit with {0} {1}. Total is {2}", card.Suit, card.RankDisplayName, total);
+                    Console.WriteLine("Hit with {0} {1}. Total is {2}", card.Suit, card.RankName, total);
                 }
                 else if (read == "Stand")
                 {
