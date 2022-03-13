@@ -28,7 +28,7 @@ namespace BlackJack
                         break;
                     }
 
-                    Console.WriteLine("Hit with {0} {1}. Total is {2}", card.Suit, card.Rank, total);
+                    Console.WriteLine("Hit with {0} {1}. Total is {2}", card.Suit, card.RankDisplayName, total);
                 }
                 else if (read == "Stand")
                 {
