@@ -8,7 +8,7 @@ namespace BlackJack
     {
         static void Main(string[] args)
         {
-            var gameControl = new GameControl();
+            var gameControl = new GameControl(new GameSumService());
 
             gameControl.RunGame();
         }

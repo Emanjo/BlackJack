@@ -23,5 +23,22 @@ namespace BlackJack.Tests.Given_Deck
         {
             Assert.AreEqual(4, _deck.Cards.Select(x => (int)x.Suit).Distinct().ToList().Count);
         }
+
+        [Test]
+        public void Should_have_correct_rankname()
+        {
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 1).All(c => c.RankName == "A"));
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 11).All(c => c.RankName == "J"));
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 12).All(c => c.RankName == "Q"));
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 13).All(c => c.RankName == "K"));
+        }
+
+        [Test]
+        public void Should_have_correct_cardpoint()
+        {
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 11).All(c => c.CardPoints == 10));
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 12).All(c => c.CardPoints == 10));
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 13).All(c => c.CardPoints == 10));
+        }
     }
 }

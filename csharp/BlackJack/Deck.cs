@@ -17,13 +17,13 @@ namespace BlackJack
         {
             Cards = new Queue<Card>();
 
-            foreach (var card in GetListOfCardsInRandomOrder())
+            foreach (var card in GetShuffledCards())
             {
                 Cards.Enqueue(card);
             }
         }
 
-        private static List<Card> GetListOfCardsInRandomOrder()
+        private static List<Card> GetShuffledCards()
         {
             var listOfCards = new List<Card>();
 

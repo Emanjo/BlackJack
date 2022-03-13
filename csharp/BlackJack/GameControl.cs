@@ -7,10 +7,17 @@ namespace BlackJack
 {
     public class GameControl
     {
+        private readonly GameSumService _gameSumService;
+
         public GameParticipant Player { get; } = new GameParticipant();
         public GameParticipant Dealer { get; } = new GameParticipant();
 
         public Deck Deck { get; } = new Deck();
+
+        public GameControl(GameSumService gameSumService)
+        {
+            _gameSumService = gameSumService;
+        }
 
         public void RunGame()
         {
@@ -30,24 +37,20 @@ namespace BlackJack
 
             DrawDealerCards();
 
-            DetermineWinner();
-        }
+            var winner = _gameSumService.DetermineWinner(Dealer.TotalSum, Player.TotalSum);
 
-        private void DetermineWinner()
-        {
-            if(Dealer.TotalSum > 21 || Math.Abs(Player.TotalSum - 21) < Math.Abs(Dealer.TotalSum - 21))
+            switch (winner)
             {
-                Console.WriteLine("You win!");
-                return;
+                case 1:
+                    Console.WriteLine("Dealer wins!");
+                    break;
+                case 2:
+                    Console.WriteLine("Player wins!");
+                    break;
+                default:
+                    Console.WriteLine("Its a draw");
+                    break;
             }
-
-            if(Dealer.TotalSum == Player.TotalSum)
-            {
-                Console.WriteLine("Its a draw.");
-                return;
-            }
-
-            Console.WriteLine("You lost!");
         }
 
         private void DrawPlayerCards()
@@ -66,7 +69,7 @@ namespace BlackJack
 
                     if (card.RankName == "A")
                     {
-                        DeterminePointsForEss(Player, card);
+                        card.UpdateCardPoints(_gameSumService.DeterminePointsForACard(Player.TotalSum));
                     }
 
                     Player.Hand.Add(card);
@@ -95,7 +98,7 @@ namespace BlackJack
 
                 if (card.RankName == "A")
                 {
-                    DeterminePointsForEss(Player, card);
+                    card.UpdateCardPoints(_gameSumService.DeterminePointsForACard(Player.TotalSum));
                 }
 
                 Dealer.Hand.Add(card);
@@ -108,16 +111,6 @@ namespace BlackJack
                 {
                     break;
                 }
-            }
-        }
-
-        private static void DeterminePointsForEss(GameParticipant player, Card card)
-        {
-            var totalPlusEssAsElleven = player.TotalSum + 11;
-
-            if (totalPlusEssAsElleven <= 21)
-            {
-                card.UpdateCardPoints(11);
             }
         }
     }
