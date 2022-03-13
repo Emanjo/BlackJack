@@ -27,7 +27,6 @@ namespace BlackJack
 
         private int GetInitialCardPoints() => Rank switch
         {
-            1 => 1,
             11 => 10,
             12 => 10,
             13 => 10,

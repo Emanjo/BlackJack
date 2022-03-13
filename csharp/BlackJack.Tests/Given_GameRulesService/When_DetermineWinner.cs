@@ -7,11 +7,11 @@ namespace BlackJack.Tests.Given_GameSumService
 {
     public class When_DetermineWinner : Scenario
     {
-        private GameSumService _gameSumService;
+        private GameRulesService _gameSumService;
 
         public override void Given()
         {
-            _gameSumService = new GameSumService();
+            _gameSumService = new GameRulesService();
         }
 
         [Test]

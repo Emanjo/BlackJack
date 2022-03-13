@@ -7,16 +7,16 @@ namespace BlackJack
 {
     public class GameControl
     {
-        private readonly GameSumService _gameSumService;
+        private readonly GameRulesService _gameRulesService;
 
         public GameParticipant Player { get; } = new GameParticipant();
         public GameParticipant Dealer { get; } = new GameParticipant();
 
         public Deck Deck { get; } = new Deck();
 
-        public GameControl(GameSumService gameSumService)
+        public GameControl(GameRulesService gameSumService)
         {
-            _gameSumService = gameSumService;
+            _gameRulesService = gameSumService;
         }
 
         public void RunGame()
@@ -31,13 +31,13 @@ namespace BlackJack
 
             if (Player.TotalSum > 21)
             {
-                Console.WriteLine("You lost...");
+                Console.WriteLine("Dealer wins!");
                 return;
             }
 
             DrawDealerCards();
 
-            var winner = _gameSumService.DetermineWinner(Dealer.TotalSum, Player.TotalSum);
+            var winner = _gameRulesService.DetermineWinner(Dealer.TotalSum, Player.TotalSum);
 
             switch (winner)
             {
@@ -55,7 +55,7 @@ namespace BlackJack
 
         private void DrawPlayerCards()
         {
-            Console.WriteLine("Your turn...");
+            Console.WriteLine("Player's turn...");
 
             while (true)
             {
@@ -69,7 +69,7 @@ namespace BlackJack
 
                     if (card.RankName == "A")
                     {
-                        card.UpdateCardPoints(_gameSumService.DeterminePointsForACard(Player.TotalSum));
+                        card.UpdateCardPoints(_gameRulesService.DeterminePointsForACard(Player.TotalSum));
                     }
 
                     Player.Hand.Add(card);
@@ -98,7 +98,7 @@ namespace BlackJack
 
                 if (card.RankName == "A")
                 {
-                    card.UpdateCardPoints(_gameSumService.DeterminePointsForACard(Player.TotalSum));
+                    card.UpdateCardPoints(_gameRulesService.DeterminePointsForACard(Player.TotalSum));
                 }
 
                 Dealer.Hand.Add(card);

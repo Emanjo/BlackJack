@@ -2,7 +2,7 @@
 
 namespace BlackJack
 {
-    public class GameSumService
+    public class GameRulesService
     {
         public int DeterminePointsForACard(int totalSum)
         {
@@ -19,8 +19,6 @@ namespace BlackJack
         /// <summary>
         /// Determines the winner of the game
         /// </summary>
-        /// <param name="dealerSum"></param>
-        /// <param name="playerSum"></param>
         /// <returns>0 = draw, 1 = dealer, 2 = player</returns>
         public int DetermineWinner(int dealerSum, int playerSum)
         {
