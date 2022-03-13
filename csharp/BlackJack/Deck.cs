@@ -30,7 +30,7 @@ namespace BlackJack
             {
                 for (int i = 1; i < 14; i++)
                 {
-                    listOfCards.Add(new Card() { Rank = i, Suit = suit });
+                    listOfCards.Add(new Card(rank: i, suit: suit));
                 }
             }
 

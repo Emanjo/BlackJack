@@ -19,10 +19,17 @@ namespace BlackJack
                 if (read == "Hit")
                 {
                     var card = deck.Cards.Dequeue();
-                    hand.Add(card);
-                    var total = hand.Sum(x => Math.Min(x.Rank, 10));
 
-                    if(total > 21)
+                    if (card.RankDisplayName.ToLower() == "ess")
+                    {
+                        DeterminePointsForEss(hand, card);
+                    }
+
+                    hand.Add(card);
+
+                    int total = GetSumForHand(hand);
+
+                    if (total > 21)
                     {
                         Console.WriteLine("You lost...");
                         break;
@@ -35,6 +42,22 @@ namespace BlackJack
                     break;
                 }
             }
+        }
+
+
+        private static void DeterminePointsForEss(List<Card> hand, Card card)
+        {
+            var totalPlusEssAsElleven = GetSumForHand(hand) + 11;
+
+            if(totalPlusEssAsElleven <= 21)
+            {
+                card.UpdateCardPoints(11);
+            }
+        }
+
+        private static int GetSumForHand(List<Card> hand)
+        {
+            return hand.Sum(x => x.CardPoints);
         }
     }
 }
