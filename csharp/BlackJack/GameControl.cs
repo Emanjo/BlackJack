@@ -12,7 +12,7 @@ namespace BlackJack
 
         public Deck Deck { get; } = new Deck();
 
-        public void StartGame()
+        public void RunGame()
         {
             var card = Deck.Cards.Dequeue();
 
@@ -22,9 +22,32 @@ namespace BlackJack
 
             DrawPlayerCards();
 
-            if (Player.TotalSum > 21) return;
+            if (Player.TotalSum > 21)
+            {
+                Console.WriteLine("You lost...");
+                return;
+            }
 
             DrawDealerCards();
+
+            DetermineWinner();
+        }
+
+        private void DetermineWinner()
+        {
+            if(Dealer.TotalSum > 21 || Math.Abs(Player.TotalSum - 21) < Math.Abs(Dealer.TotalSum - 21))
+            {
+                Console.WriteLine("You win!");
+                return;
+            }
+
+            if(Dealer.TotalSum == Player.TotalSum)
+            {
+                Console.WriteLine("Its a draw.");
+                return;
+            }
+
+            Console.WriteLine("You lost!");
         }
 
         private void DrawPlayerCards()
@@ -41,19 +64,19 @@ namespace BlackJack
                 {
                     var card = Deck.Cards.Dequeue();
 
-                    if (card.RankName.ToLower() == "ess")
+                    if (card.RankName == "A")
                     {
                         DeterminePointsForEss(Player, card);
                     }
 
                     Player.Hand.Add(card);
 
+                    Console.WriteLine("Hit with {0} {1}. Total is {2}", card.Suit, card.RankName, Player.TotalSum);
+                    
                     if (Player.TotalSum > 21)
                     {
                         break;
                     }
-
-                    Console.WriteLine("Hit with {0} {1}. Total is {2}", card.Suit, card.RankName, Player.TotalSum);
                 }
                 else if (read == "Stand")
                 {
@@ -70,14 +93,14 @@ namespace BlackJack
             {
                 var card = Deck.Cards.Dequeue();
 
-                if (card.RankName.ToLower() == "ess")
+                if (card.RankName == "A")
                 {
                     DeterminePointsForEss(Player, card);
                 }
 
                 Dealer.Hand.Add(card);
 
-                Console.WriteLine("Hit {0} {1}. Total is {2}", card.Suit, card.RankName, Dealer.TotalSum);
+                Console.WriteLine("Dealer got {0} {1}. Total is {2}", card.Suit, card.RankName, Dealer.TotalSum);
 
                 Thread.Sleep(500);
 

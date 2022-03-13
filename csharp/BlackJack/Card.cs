@@ -9,10 +9,10 @@ namespace BlackJack
         public int CardPoints { get; private set; }
         public string RankName => Rank switch
         {
-            1 => "Ess",
-            11 => "Knekt",
-            12 => "Dame",
-            13 => "Konge",
+            1 => "A",
+            11 => "J",
+            12 => "Q",
+            13 => "K",
             _ => Rank.ToString(),
         };
 
