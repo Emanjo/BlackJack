@@ -31,14 +31,14 @@ namespace BlackJack.Tests.Given_Deck
             Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 11).All(c => c.RankName == "J"));
             Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 12).All(c => c.RankName == "Q"));
             Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 13).All(c => c.RankName == "K"));
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank > 1 && s.Rank < 11).All(c => c.RankName == c.Rank.ToString()));
         }
 
         [Test]
         public void Should_have_correct_cardpoint()
         {
-            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 11).All(c => c.CardPoints == 10));
-            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 12).All(c => c.CardPoints == 10));
-            Assert.IsTrue(_deck.Cards.Where(s => s.Rank == 13).All(c => c.CardPoints == 10));
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank < 10).All(c => c.CardPoints == c.Rank));
+            Assert.IsTrue(_deck.Cards.Where(s => s.Rank > 10).All(c => c.CardPoints == 10));
         }
     }
 }

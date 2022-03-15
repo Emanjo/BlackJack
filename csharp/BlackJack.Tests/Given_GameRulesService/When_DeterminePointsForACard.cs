@@ -17,6 +17,7 @@ namespace BlackJack.Tests.Game_Started
             Assert.AreEqual(1, _gameRulesService.DeterminePointsForACard(20));
             Assert.AreEqual(11, _gameRulesService.DeterminePointsForACard(10));
             Assert.AreEqual(11, _gameRulesService.DeterminePointsForACard(0));
+            Assert.AreEqual(1, _gameRulesService.DeterminePointsForACard(17));
         }
     }
 }
