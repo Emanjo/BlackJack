@@ -19,9 +19,7 @@ namespace BlackJack
         public Card(int rank, Suit suit)
         {
             Rank = rank;
-            CardPoints = rank;
             Suit = suit;
-
             CardPoints = GetInitialCardPoints();
         }
 
