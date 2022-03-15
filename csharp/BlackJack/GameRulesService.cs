@@ -8,7 +8,7 @@ namespace BlackJack
         {
             var totalPlusEssAsElleven = totalSum + 11;
 
-            if (totalPlusEssAsElleven <= 21)
+            if (totalPlusEssAsElleven < 22)
             {
                 return 11;
             }

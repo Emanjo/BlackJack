@@ -98,7 +98,7 @@ namespace BlackJack
 
                 if (card.RankName == "A")
                 {
-                    card.UpdateCardPoints(_gameRulesService.DeterminePointsForACard(Player.TotalSum));
+                    card.UpdateCardPoints(_gameRulesService.DeterminePointsForACard(Dealer.TotalSum));
                 }
 
                 Dealer.Hand.Add(card);
